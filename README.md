@@ -1,44 +1,23 @@
 # ComfyUI VNCCS Utils
 
-A collection of utility nodes for [ComfyUI](https://github.com/comfyanonymous/ComfyUI) specifically designed for advanced camera control and prompt generation. These nodes are optimized for use with multi-angle LoRAs like **Qwen-Image-Edit-2511-Multiple-Angles**.
+A collection of utility nodes from the [VNCCS](https://github.com/AHEKOT/ComfyUI_VNCCS) project that are useful not only for the project's primary goals but also for everyday ComfyUI workflows.
 
-## 🚀 Features
+## Main Nodes
 
 ### 1. VNCCS Visual Camera Control
-A node featuring a custom graphical user interface for intuitive camera positioning.
+An interactive node with a visual widget for controlling camera position. This is the primary node for intuitive angle control.
+These node is specifically designed for advanced camera control and prompt generation, optimized for multi-angle LoRAs like **Qwen-Image-Edit-2511-Multiple-Angles**.
 
-*   **Interactive Canvas**: Click and drag to set the **Azimuth** (rotation) and **Distance** (zoom levels).
-*   **Elevation Slider**: Vertical bar on the right to adjust the shot height (-30° to 60°).
-*   **Trigger Toggle**: Click the status indicator in the bottom-right to toggle the `<sks>` trigger word (Green = Active, Red = Post-processed prompt only).
+*   **Visual Widget**: Allows mouse-based selection of azimuth (rotation around the subject) and distance (rings).
+*   **Elevation Slider**: A vertical bar on the right for selecting the elevation angle (-30° to 60°).
+*   **Trigger Word**: A square indicator in the bottom-right corner toggles the presence of the <sks> trigger in the prompt (green for ON, red for OFF).
 
-### 2. VNCCS Position Control
-A standard node variant using traditional ComfyUI sliders and dropdowns. Best for automation or when connecting external primitives.
 
----
 
-## 🛠 Parameters Reference
+## Installation
 
-| Parameter | Values | Description |
-| :--- | :--- | :--- |
-| **Azimuth** | 0° to 315° (45° steps) | Horizontal rotation (0°=Front, 90°=Right, 180°=Back) |
-| **Elevation** | -30°, 0°, 30°, 60° | Vertical angle (Low-angle to High-angle) |
-| **Distance** | Close-up, Medium, Wide | Shot composition size |
-| **Trigger** | Boolean | Toggle for the `<sks>` activation token |
+1. Copy the ComfyUI_VNCCS_Utils folder into your ComfyUI custom_nodes directory.
+2. Restart ComfyUI.
 
----
-
-## 📦 Installation
-
-1. Navigate to your ComfyUI custom nodes directory:
-   ```bash
-   cd ComfyUI/custom_nodes
-   ```
-2. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/ComfyUI_VNCCS_Utils
-   ```
-3. Restart ComfyUI.
-
-## 💡 Usage
-
-These nodes output a formatted `STRING`. Use this output as an input for a **CLIP Text Encode** node or concatenate it with your main prompt using a string joiner. The generated tokens (e.g., `front-right quarter view`, `elevated shot`) are compatible with most modern multi-angle dataset standards.
+## Usage
+The node outputs a string (Prompt) that should be connected to your CLIP Text Encode or used for concatenation with other prompt parts. It's ideally suited for LoRAs trained on multi-angle datasets.
