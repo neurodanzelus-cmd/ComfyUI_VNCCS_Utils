@@ -77,11 +77,46 @@ class VNCCS_CameraWidget {
         ctx.fillStyle = COLOR_BG;
         ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
+        this.drawFrontIndicator(ctx); // Draw this first so it's behind
         this.drawGrid(ctx);
         this.drawSubject(ctx);
         this.drawCameraTriangle(ctx);
         this.drawElevationBar(ctx);
         this.drawInfoText(ctx);
+    }
+
+    drawFrontIndicator(ctx) {
+        // Draw arrow from bottom towards center to indicate FRONT
+        ctx.save();
+        ctx.translate(CENTER_X, CENTER_Y);
+        
+        // Text "FRONT"
+        ctx.fillStyle = "rgba(255, 255, 255, 0.3)"; // Semi-transparent gray/white
+        ctx.font = "bold 16px sans-serif";
+        ctx.textAlign = "center";
+        
+        // Position inside the circle to avoid clipping
+        // Radius is 140. Info text is at bottom.
+        // Place text at Y offset 100 (Abs Y=260)
+        ctx.fillText("FRONT", 0, RADIUS_WIDE - 40); 
+
+        // Arrow pointing inward from bottom
+        ctx.beginPath();
+        // Shaft: from near rim (135) to inward (115)
+        ctx.moveTo(0, RADIUS_WIDE - 5); 
+        ctx.lineTo(0, RADIUS_WIDE - 25); 
+        
+        // Arrowhead
+        ctx.moveTo(0, RADIUS_WIDE - 25);
+        ctx.lineTo(-5, RADIUS_WIDE - 18);
+        ctx.moveTo(0, RADIUS_WIDE - 25);
+        ctx.lineTo(5, RADIUS_WIDE - 18);
+        
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.restore();
     }
 
     drawGrid(ctx) {
@@ -120,13 +155,13 @@ class VNCCS_CameraWidget {
     drawCameraTriangle(ctx) {
         const r = DISTANCE_MAP[this.state.distance];
         // Convert azimuth to math angle. 
-        // 0 deg = Top ( -PI/2 )
-        // 90 deg = Right ( 0 )
-        // Wait, standard math: 0 is Right. -PI/2 is Top.
-        // We want 0=Front(Top), 90=Right.
-        // So MathAngle = (Azimuth - 90) * (PI/180)
+        // 0 deg = Front (Bottom, PI/2)
+        // 90 deg = Right (0)
+        // 180 deg = Back (Top, -PI/2)
+        // 270 deg = Left (PI)
         
-        const angleRad = (this.state.azimuth - 90) * (Math.PI / 180);
+        // Formula: Angle = PI/2 - (Azimuth * PI/180)
+        const angleRad = (Math.PI / 2) - (this.state.azimuth * (Math.PI / 180));
         
         const cx = CENTER_X + r * Math.cos(angleRad);
         const cy = CENTER_Y + r * Math.sin(angleRad);
@@ -266,16 +301,24 @@ class VNCCS_CameraWidget {
     updatePos(x, y) {
         // 1. Calculate Angle
         const dx = x - CENTER_X;
-        const dy = y - CENTER_Y;
+        const dy = y - CENTER_Y; // Y positive is down
+        
         let angleRad = Math.atan2(dy, dx);
         
-        // Convert to Azimuth (0=Top, 90=Right)
-        // atan2 returns angle from X axis (Right).
-        // 0 -> 90 deg (Right)
-        // -PI/2 -> 0 deg (Top)
+        // Convert to Azimuth 
+        // 0 deg = Front (Bottom, PI/2)
+        // 90 deg = Right (0)
+        // 180 deg = Back (Top, -PI/2)
         
-        let deg = (angleRad * 180 / Math.PI) + 90;
+        // From draw: angleRad = PI/2 - (Az * PI/180)
+        // Az * PI/180 = PI/2 - angleRad
+        // Az = (PI/2 - angleRad) * 180 / PI
+        
+        let deg = (Math.PI/2 - angleRad) * (180 / Math.PI);
+        
+        // Normalize 0-360
         if (deg < 0) deg += 360;
+        if (deg >= 360) deg -= 360;
         
         // Snap to 45 degrees
         this.state.azimuth = Math.round(deg / 45) * 45;
