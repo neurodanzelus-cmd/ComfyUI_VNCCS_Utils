@@ -32,6 +32,8 @@ This node acts as the backend for the system. It connects to a HuggingFace repos
 *   **Downloads**: Handles downloading models in the background with queue support.
 *   **Civitai Support**: Supports API Key authentication for restricted Civitai models.
 
+👉 **[Configuration Guide: How to create your own model repo](docs/MODEL_MANAGER_GUIDE.md)**
+
 #### VNCCS Model Selector
 The companion node for selecting models. It provides a rich Graphical User Interface.
 *   **Visual Card UI**: Displays the selected model's name, version, installed status, and description in a clean card format.
