@@ -23,7 +23,24 @@ A powerful detailing node that leverages QWEN-Image-Edit2511 model to enhance de
 *   **Inputs**: Requires standard model/clip/vae plus a BBOX_DETECTOR (like YOLO).
 *   **Options**: Supports QWEN-Image-Edit2511 specific optimizations (`distortion_fix`, `qwen_2511` mode).
 
-### 3. VNCCS BBox Extractor
+### 3. VNCCS Model Manager & Selector
+A robust system for managing and selecting models (LoRAs, Checkpoints) directly within ComfyUI, with support for Civitai and HuggingFace.
+
+#### VNCCS Model Manager (HF)
+This node acts as the backend for the system. It connects to a HuggingFace repository containing a `model_updater.json` configuration file, which defines the available models and their download sources.
+*   **Repo ID**: Specify the HuggingFace repository ID.
+*   **Downloads**: Handles downloading models in the background with queue support.
+*   **Civitai Support**: Supports API Key authentication for restricted Civitai models.
+
+#### VNCCS Model Selector
+The companion node for selecting models. It provides a rich Graphical User Interface.
+*   **Visual Card UI**: Displays the selected model's name, version, installed status, and description in a clean card format.
+*   **Smart Search**: Clicking the card opens a modal with a searchable list of all available models in the repository.
+*   **Status Indicators**: Shows clear indicators for "Installed", "Update Available", "Missing", or "Downloading".
+*   **One-Click Install/Update**: Allows downloading or updating models directly from the list.
+*   **Universal Connection**: Outputs a standard relative path string that is **fully compatible with standard ComfyUI nodes**. You can connect it directly!
+
+### 4. VNCCS BBox Extractor
 A helper node to simply extract and visualize the crops. Useful when you need extract bbox detected regions but don't want to run whole facedetailer.
 
 
