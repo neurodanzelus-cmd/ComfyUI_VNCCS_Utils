@@ -1,2 +1,4 @@
 opencv-python
 color-matcher
+huggingface_hub
+aiohttp
