@@ -78,6 +78,13 @@ A professional 3D posing and lighting environment running entirely within a Comf
 *   **Precision Framing**: Integrated camera radar and Zoom controls with a clean viewport frame visualization.
 *   **Natural Language Prompts**: Automatically generates descriptive lighting prompts for seamless scene integration.
 *   **Tracing Support**: Load background reference images for precise character alignment.
+  
+Added
+
+*    **IK Control Panel**: Toggle between FK and IK modes with individual chain controls for arms, legs, spine, and hips.
+*    **Pole Targets**: Orange guide spheres for precise elbow and knee bend direction control during IK manipulation.
+*    **Reset Selected Bone**: Quickly reset only the currently selected bone to its default rotation.
+
 
 👉 **[Detailed Usage Guide](docs/VNCCS_POSE_STUDIO_USAGE.md)**
 
