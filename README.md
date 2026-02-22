@@ -1,4 +1,4 @@
-# ComfyUI VNCCS Utils Fork
+# ComfyUI VNCCS Utils
 
 A collection of utility nodes from the [VNCCS](https://github.com/AHEKOT/ComfyUI_VNCCS) project that are useful not only for the project's primary goals but also for everyday ComfyUI workflows.
 
@@ -9,7 +9,7 @@ A collection of utility nodes from the [VNCCS](https://github.com/AHEKOT/ComfyUI
 
 ## **If you find my project useful, please consider supporting it! I work on it completely on my own, and your support will allow me to continue maintaining it and adding even more cool features!**
 
-[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/danzelus)
+<a href="https://www.buymeacoffee.com/MIUProject" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## Main Nodes
 
@@ -78,12 +78,13 @@ A professional 3D posing and lighting environment running entirely within a Comf
 *   **Precision Framing**: Integrated camera radar and Zoom controls with a clean viewport frame visualization.
 *   **Natural Language Prompts**: Automatically generates descriptive lighting prompts for seamless scene integration.
 *   **Tracing Support**: Load background reference images for precise character alignment.
-  
+    
 Added
 
 *    **IK Control Panel**: Toggle between FK and IK modes with individual chain controls for arms, legs, spine, and hips.
 *    **Pole Targets**: Orange guide spheres for precise elbow and knee bend direction control during IK manipulation.
 *    **Reset Selected Bone**: Quickly reset only the currently selected bone to its default rotation.
+
 
 
 👉 **[Detailed Usage Guide](docs/VNCCS_POSE_STUDIO_USAGE.md)**
